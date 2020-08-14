@@ -11,3 +11,6 @@ jobs:
       - checkout
       - run:
           command: ./gradlew build
+      - store_artifacts:
+          path: app/build/outputs/apk/ProdConfig/release
+          destination: apks/
