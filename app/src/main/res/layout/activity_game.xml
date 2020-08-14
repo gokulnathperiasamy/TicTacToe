@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="Player X \u2014"
+                android:text="Player (X) \u2014"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
 
@@ -52,7 +52,7 @@
             android:gravity="end">
 
             <TextView
-                android:id="@+id/tv_y_score"
+                android:id="@+id/tv_o_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
-                android:text="\u2014 Player O"
+                android:text="\u2014 Computer (O)"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
 

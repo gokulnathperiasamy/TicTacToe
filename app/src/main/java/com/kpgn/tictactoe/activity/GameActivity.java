@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import com.kpgn.tictactoe.R;
 import com.kpgn.tictactoe.entity.GameState;
 import com.kpgn.tictactoe.entity.Player;
 import com.kpgn.tictactoe.processor.GameProcessor;
+import com.kpgn.tictactoe.processor.MoveProcessor;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,8 +58,8 @@ public class GameActivity extends AppCompatActivity {
     @BindView(R.id.tv_x_score)
     TextView mPlayerXScore;
 
-    @BindView(R.id.tv_y_score)
-    TextView mPlayerYScore;
+    @BindView(R.id.tv_o_score)
+    TextView mPlayerOScore;
 
     @BindView(R.id.tv_result)
     TextView mResult;
@@ -68,7 +70,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static int totalMovesCompleted = 0;
     private static int playerXWinCounter = 0;
-    private static int playerYWinCounter = 0;
+    private static int playerOWinCounter = 0;
 
     private static char[][] currentGameBoard = {
             {'-', '-', '-'},
@@ -90,8 +92,9 @@ public class GameActivity extends AppCompatActivity {
             R.id.container_10, R.id.container_11, R.id.container_12,
             R.id.container_20, R.id.container_21, R.id.container_22})
     public void ctaContainerClicked(View view) {
-        updateState(view.getTag().toString());
-        togglePlayer();
+        if (currentPlayer == Player.FIRST) {
+            updateState(view.getTag().toString());
+        }
     }
 
     private void initValues() {
@@ -133,6 +136,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateState(String selectedTag) {
+        if (selectedTag == null) {
+            showFullScreenDialog(getResources().getString(R.string.game_draw_text));
+            return;
+        }
         char[] xyIndex = selectedTag.toCharArray();
         int xIndex = Integer.parseInt(String.valueOf(xyIndex[0]));
         int yIndex = Integer.parseInt(String.valueOf(xyIndex[1]));
@@ -144,20 +151,21 @@ public class GameActivity extends AppCompatActivity {
             imageViewList[xIndex][yIndex].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_o));
             currentGameBoard[xIndex][yIndex] = Player.SECOND.getPlayerId();
         }
-
-        if (++totalMovesCompleted > 4) {
-            updateResult(GameProcessor.checkEndState(currentGameBoard, currentPlayer));
-        }
-
+        updateResult(GameProcessor.checkEndState(currentGameBoard, currentPlayer));
         containerList[xIndex][yIndex].setClickable(false);
     }
 
     private void togglePlayer() {
         if (currentPlayer == Player.FIRST) {
             currentPlayer = Player.SECOND;
+            (new Handler()).postDelayed(this::makeAIMove, 500);
         } else {
             currentPlayer = Player.FIRST;
         }
+    }
+
+    private void makeAIMove() {
+        updateState(MoveProcessor.getAIMove(currentGameBoard));
     }
 
     private void updateResult(GameState gameState) {
@@ -166,12 +174,14 @@ public class GameActivity extends AppCompatActivity {
             if (currentPlayer.getPlayerId() == Player.FIRST.getPlayerId()) {
                 mPlayerXScore.setText(String.valueOf(++playerXWinCounter));
             } else {
-                mPlayerYScore.setText(String.valueOf(++playerYWinCounter));
+                mPlayerOScore.setText(String.valueOf(++playerOWinCounter));
             }
+            showFullScreenDialog(String.format(getResources().getString(R.string.game_over_text), Player.toString(currentPlayer.getPlayerId())));
             updatedTileTint(gameState);
-            showFullScreenDialog(String.format(getResources().getString(R.string.game_over_text), currentPlayer.getPlayerId()));
         } else if (totalMovesCompleted == 9) {
             showFullScreenDialog(getResources().getString(R.string.game_draw_text));
+        } else {
+            togglePlayer();
         }
     }
 

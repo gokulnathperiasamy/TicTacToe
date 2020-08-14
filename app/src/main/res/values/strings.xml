@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Tic Tac Toe</string>
-    <string name="game_over_text">Game Over, Player %1$s Wins!\n\nTap to Restart.</string>
+    <string name="game_over_text">Game Over, %1$s Wins! Tap to Restart.</string>
     <string name="game_draw_text">Game Draw! Tap to Restart.</string>
 </resources>

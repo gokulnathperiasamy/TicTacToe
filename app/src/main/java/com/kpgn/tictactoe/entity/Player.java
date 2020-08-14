@@ -13,4 +13,12 @@ public enum Player {
     Player(char playerId) {
         this.playerId = playerId;
     }
+
+    public static String toString(char playerId) {
+        if (playerId == FIRST.getPlayerId()) {
+            return "Player";
+        } else {
+            return "Computer";
+        }
+    }
 }
