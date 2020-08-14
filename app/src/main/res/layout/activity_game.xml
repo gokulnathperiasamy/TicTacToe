@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activity.GameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/game_board"
+        android:layout_alignStart="@id/game_board"
+        android:layout_alignEnd="@id/game_board"
+        android:layout_marginBottom="32dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="50">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="Player X \u2014"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_x_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tv_y_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="0"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="\u2014 Player O"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/game_board"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/board_border"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bottom_border"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/container_00"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="00">
+
+                <ImageView
+                    android:id="@+id/image_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name"
+                    tools:src="@drawable/ic_x"
+                    tools:tint="@color/colorWinner" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_01"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="01">
+
+                <ImageView
+                    android:id="@+id/image_01"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name"
+                    tools:src="@drawable/ic_o" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_02"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="02">
+
+                <ImageView
+                    android:id="@+id/image_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bottom_border"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/container_10"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="10">
+
+                <ImageView
+                    android:id="@+id/image_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_11"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="11">
+
+                <ImageView
+                    android:id="@+id/image_11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_12"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="12">
+
+                <ImageView
+                    android:id="@+id/image_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/container_20"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="20">
+
+                <ImageView
+                    android:id="@+id/image_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_21"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="21">
+
+                <ImageView
+                    android:id="@+id/image_21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_22"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/right_border"
+                android:tag="22">
+
+                <ImageView
+                    android:id="@+id/image_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_board"
+        android:layout_alignStart="@id/game_board"
+        android:layout_alignEnd="@id/game_board"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            tools:text="Game Over! Player X Wins!" />
+
+    </LinearLayout>
+
+</RelativeLayout>
