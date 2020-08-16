@@ -13,9 +13,9 @@
 
 #### Screenshots:
 
-<img src="play/Screenshot_01.png" width="50%" height="50%">
-<img src="play/Screenshot_02.png" width="50%" height="50%">
-<img src="play/Screenshot_03.png" width="50%" height="50%">
+<img src="play/Img_01.png" width="50%" height="50%">
+<img src="play/Img_02.png" width="50%" height="50%">
+<img src="play/Img_03.png" width="50%" height="50%">
 
 #### Author
 
