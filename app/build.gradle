@@ -4,11 +4,11 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf'
 
 static def appVersionName() {
-    return "0.4"
+    return "1.0"
 }
 
 static def appVersionCode() {
-    return 2
+    return 10
 }
 
 static def appBaseName() {
