@@ -1,19 +1,15 @@
 package com.kpgn.tictactoe.activity;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kpgn.tictactoe.R;
 import com.kpgn.tictactoe.entity.GameState;
 import com.kpgn.tictactoe.entity.Player;
+import com.kpgn.tictactoe.helper.DialogHelper;
 import com.kpgn.tictactoe.processor.AIMoveProcessor;
 import com.kpgn.tictactoe.processor.GameStateProcessor;
 
@@ -66,17 +62,11 @@ public class GameActivity extends AppCompatActivity {
 
     private ImageView[][] imageViewList = new ImageView[3][3];
     private View[][] containerList = new View[3][3];
-    private static Player currentPlayer = Player.FIRST;
-
-    private static int totalMovesCompleted = 0;
-    private static int playerXWinCounter = 0;
-    private static int playerOWinCounter = 0;
-
-    private static char[][] currentGameBoard = {
-            {'-', '-', '-'},
-            {'-', '-', '-'},
-            {'-', '-', '-'}
-    };
+    private char[][] currentGameBoard = new char[3][3];
+    private Player currentPlayer = Player.FIRST;
+    private int totalMovesCompleted = 0;
+    private int playerXWinCounter = 0;
+    private int playerOWinCounter = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,7 +97,7 @@ public class GameActivity extends AppCompatActivity {
         containerList[2] = containerListRow3;
     }
 
-    private void resetValues() {
+    public void resetValues() {
         for (View[] parentView : containerList) {
             for (View childView : parentView) {
                 childView.setClickable(true);
@@ -130,14 +120,15 @@ public class GameActivity extends AppCompatActivity {
             imageView.setColorFilter(null);
         }
 
-        mResult.setText("");
+        mResult.setText(R.string.initial_players_turn);
         totalMovesCompleted = 0;
         currentPlayer = Player.FIRST;
     }
 
     private void updateState(String selectedTag) {
         if (selectedTag == null) {
-            showFullScreenDialog(getResources().getString(R.string.game_draw_text));
+            DialogHelper.showFullScreenDialog(this, this, getResources().getString(R.string.game_draw_text));
+            mResult.setText("");
             return;
         }
         char[] xyIndex = selectedTag.toCharArray();
@@ -158,9 +149,11 @@ public class GameActivity extends AppCompatActivity {
     private void togglePlayer() {
         if (currentPlayer == Player.FIRST) {
             currentPlayer = Player.SECOND;
+            mResult.setText(R.string.computers_turn);
             (new Handler()).postDelayed(this::makeAIMove, 500);
         } else {
             currentPlayer = Player.FIRST;
+            mResult.setText(R.string.players_turn);
         }
     }
 
@@ -171,15 +164,17 @@ public class GameActivity extends AppCompatActivity {
     private void updateResult(GameState gameState) {
         boolean isGameOver = gameState.currentWinningState != -1;
         if (isGameOver) {
+            mResult.setText("");
             if (currentPlayer.getPlayerId() == Player.FIRST.getPlayerId()) {
                 mPlayerXScore.setText(String.valueOf(++playerXWinCounter));
             } else {
                 mPlayerOScore.setText(String.valueOf(++playerOWinCounter));
             }
-            showFullScreenDialog(String.format(getResources().getString(R.string.game_over_text), Player.toString(currentPlayer.getPlayerId())));
+            DialogHelper.showFullScreenDialog(this, this, String.format(getResources().getString(R.string.game_over_text), Player.toString(currentPlayer.getPlayerId())));
             updatedTileTint(gameState);
         } else if (totalMovesCompleted == 9) {
-            showFullScreenDialog(getResources().getString(R.string.game_draw_text));
+            mResult.setText("");
+            DialogHelper.showFullScreenDialog(this, this, getResources().getString(R.string.game_draw_text));
         } else {
             togglePlayer();
         }
@@ -188,28 +183,6 @@ public class GameActivity extends AppCompatActivity {
     private void updatedTileTint(GameState gameState) {
         for (int index : gameState.selectedWinningState) {
             tintedImageList[index].setColorFilter(ContextCompat.getColor(this, R.color.colorWinner), android.graphics.PorterDuff.Mode.MULTIPLY);
-        }
-    }
-
-    private void showFullScreenDialog(String message) {
-        try {
-            final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.view_game_over);
-            final Window window = dialog.getWindow();
-            assert window != null;
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-            dialog.setCancelable(true);
-            dialog.setCanceledOnTouchOutside(true);
-            dialog.setOnDismissListener(dialogInterface -> resetValues());
-            dialog.setOnCancelListener(dialogInterface -> resetValues());
-            ((TextView) dialog.findViewById(R.id.tv_overlay_result)).setText(message);
-            dialog.findViewById(R.id.view_overlay).setOnClickListener(view -> dialog.dismiss());
-            dialog.show();
-        } catch (Exception e) {
-            resetValues();
         }
     }
 }

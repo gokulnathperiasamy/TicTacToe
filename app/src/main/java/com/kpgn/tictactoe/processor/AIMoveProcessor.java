@@ -73,7 +73,7 @@ public class AIMoveProcessor {
             currentGameBoard[node.indexI][node.indexJ] = Player.EMPTY.getPlayerId();
         }
 
-        return returnMin(scores);
+        return player == Player.SECOND ? returnMin(scores) : returnMax(scores);
     }
 
     public static int returnMax(List<Integer> list) {
