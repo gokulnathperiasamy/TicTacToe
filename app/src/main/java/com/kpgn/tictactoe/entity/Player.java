@@ -2,7 +2,8 @@ package com.kpgn.tictactoe.entity;
 
 public enum Player {
     FIRST('X'),
-    SECOND('O');
+    SECOND('O'),
+    EMPTY('-');
 
     public char getPlayerId() {
         return playerId;

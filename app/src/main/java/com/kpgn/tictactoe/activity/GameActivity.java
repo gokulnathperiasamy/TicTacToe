@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.kpgn.tictactoe.R;
 import com.kpgn.tictactoe.entity.GameState;
 import com.kpgn.tictactoe.entity.Player;
-import com.kpgn.tictactoe.processor.GameProcessor;
-import com.kpgn.tictactoe.processor.MoveProcessor;
+import com.kpgn.tictactoe.processor.AIMoveProcessor;
+import com.kpgn.tictactoe.processor.GameStateProcessor;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,7 +122,7 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                currentGameBoard[i][j] = '-';
+                currentGameBoard[i][j] = Player.EMPTY.getPlayerId();
             }
         }
 
@@ -151,7 +151,7 @@ public class GameActivity extends AppCompatActivity {
             imageViewList[xIndex][yIndex].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_o));
             currentGameBoard[xIndex][yIndex] = Player.SECOND.getPlayerId();
         }
-        updateResult(GameProcessor.checkEndState(currentGameBoard, currentPlayer));
+        updateResult(GameStateProcessor.checkEndState(currentGameBoard, currentPlayer));
         containerList[xIndex][yIndex].setClickable(false);
     }
 
@@ -165,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void makeAIMove() {
-        updateState(MoveProcessor.getAIMove(currentGameBoard));
+        updateState(AIMoveProcessor.getAIMove(currentGameBoard));
     }
 
     private void updateResult(GameState gameState) {

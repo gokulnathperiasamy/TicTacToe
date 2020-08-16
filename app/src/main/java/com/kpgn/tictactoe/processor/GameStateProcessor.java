@@ -7,7 +7,7 @@ import com.kpgn.tictactoe.entity.Player;
 
 import java.util.Arrays;
 
-public class GameProcessor {
+public class GameStateProcessor {
 
     public static GameState checkEndState(char[][] currentGameBoard, Player currentPlayer) {
         String[] flattenedGameBoardString = Arrays.stream(currentGameBoard).map(String::new).toArray(String[]::new);
