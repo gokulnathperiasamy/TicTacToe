@@ -6,4 +6,6 @@
     <string name="players_turn">Player\'s (X) turn.</string>
     <string name="player_x_score">Player \u2014</string>
     <string name="player_o_score">\u2014 Computer</string>
+    <string name="app_version_text">Version: %1$s</string>
+    <string name="copyright_message">Copyright \u00A9 Tic Tac Toe 2020</string>
 </resources>

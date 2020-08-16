@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kpgn.tictactoe.BuildConfig;
 import com.kpgn.tictactoe.R;
 import com.kpgn.tictactoe.entity.GameState;
 import com.kpgn.tictactoe.entity.Player;
@@ -61,6 +62,9 @@ public class GameActivity extends AppCompatActivity {
     @BindView(R.id.tv_result)
     TextView mResult;
 
+    @BindView(R.id.tv_app_version)
+    TextView mAppVersion;
+
     private ImageView[][] imageViewList = new ImageView[3][3];
     private View[][] containerList = new View[3][3];
     private char[][] currentGameBoard = new char[3][3];
@@ -89,6 +93,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initValues() {
+        mAppVersion.setText(String.format(getResources().getString(R.string.app_version_text), BuildConfig.VERSION_NAME));
+
         imageViewList[0] = imageViewListRow1;
         imageViewList[1] = imageViewListRow2;
         imageViewList[2] = imageViewListRow3;

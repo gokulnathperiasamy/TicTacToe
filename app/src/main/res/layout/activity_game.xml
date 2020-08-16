@@ -286,4 +286,6 @@
 
     </LinearLayout>
 
+    <include layout="@layout/view_footer" />
+
 </RelativeLayout>
