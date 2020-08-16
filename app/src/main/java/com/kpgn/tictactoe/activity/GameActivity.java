@@ -10,6 +10,7 @@ import com.kpgn.tictactoe.R;
 import com.kpgn.tictactoe.entity.GameState;
 import com.kpgn.tictactoe.entity.Player;
 import com.kpgn.tictactoe.helper.DialogHelper;
+import com.kpgn.tictactoe.helper.SharedPreferenceHelper;
 import com.kpgn.tictactoe.processor.AIMoveProcessor;
 import com.kpgn.tictactoe.processor.GameStateProcessor;
 
@@ -95,6 +96,21 @@ public class GameActivity extends AppCompatActivity {
         containerList[0] = containerListRow1;
         containerList[1] = containerListRow2;
         containerList[2] = containerListRow3;
+
+        getLocalScore();
+
+        mPlayerXScore.setText(String.valueOf(playerXWinCounter));
+        mPlayerOScore.setText(String.valueOf(playerOWinCounter));
+    }
+
+    private void getLocalScore() {
+        playerXWinCounter = SharedPreferenceHelper.getXScore();
+        playerOWinCounter = SharedPreferenceHelper.getOScore();
+    }
+
+    private void setLocalScore() {
+        SharedPreferenceHelper.setXScore(playerXWinCounter);
+        SharedPreferenceHelper.setOScore(playerOWinCounter);
     }
 
     public void resetValues() {
@@ -120,7 +136,7 @@ public class GameActivity extends AppCompatActivity {
             imageView.setColorFilter(null);
         }
 
-        mResult.setText(R.string.initial_players_turn);
+        mResult.setText(R.string.players_turn);
         totalMovesCompleted = 0;
         currentPlayer = Player.FIRST;
     }
@@ -172,6 +188,7 @@ public class GameActivity extends AppCompatActivity {
             }
             DialogHelper.showFullScreenDialog(this, this, String.format(getResources().getString(R.string.game_over_text), Player.toString(currentPlayer.getPlayerId())));
             updatedTileTint(gameState);
+            setLocalScore();
         } else if (totalMovesCompleted == 9) {
             mResult.setText("");
             DialogHelper.showFullScreenDialog(this, this, getResources().getString(R.string.game_draw_text));

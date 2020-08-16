@@ -2,7 +2,8 @@
     <string name="app_name">Tic Tac Toe</string>
     <string name="game_over_text">Game Over, %1$s Wins! Tap to Restart.</string>
     <string name="game_draw_text">Game Draw! Tap to Restart.</string>
-    <string name="initial_players_turn">Player\'s turn. Tap on a tile to get started!</string>
-    <string name="computers_turn">Computer\'s turn. Please wait.</string>
-    <string name="players_turn">Player\'s turn.</string>
+    <string name="computers_turn">Computer\'s (O) turn. Please wait.</string>
+    <string name="players_turn">Player\'s (X) turn.</string>
+    <string name="player_x_score">Player \u2014</string>
+    <string name="player_o_score">\u2014 Computer</string>
 </resources>
