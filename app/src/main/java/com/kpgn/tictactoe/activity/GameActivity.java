@@ -143,6 +143,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         mResult.setText(R.string.players_turn);
+        mResult.setVisibility(View.VISIBLE);
         totalMovesCompleted = 0;
         currentPlayer = Player.FIRST;
     }
@@ -187,6 +188,7 @@ public class GameActivity extends AppCompatActivity {
         boolean isGameOver = gameState.currentWinningState != -1;
         if (isGameOver) {
             mResult.setText("");
+            mResult.setVisibility(View.GONE);
             if (currentPlayer.getPlayerId() == Player.FIRST.getPlayerId()) {
                 mPlayerXScore.setText(String.valueOf(++playerXWinCounter));
             } else {
@@ -197,6 +199,7 @@ public class GameActivity extends AppCompatActivity {
             setLocalScore();
         } else if (totalMovesCompleted == 9) {
             mResult.setText("");
+            mResult.setVisibility(View.GONE);
             DialogHelper.showFullScreenDialog(this, this, getResources().getString(R.string.game_draw_text));
         } else {
             togglePlayer();

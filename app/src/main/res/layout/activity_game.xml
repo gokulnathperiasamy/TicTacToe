@@ -278,10 +278,12 @@
             android:id="@+id/tv_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/score_border"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:padding="8dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
             tools:text="Game Over! Player X Wins!" />
 
     </LinearLayout>
